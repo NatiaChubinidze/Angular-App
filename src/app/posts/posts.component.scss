@@ -1,0 +1,48 @@
+.box {
+  // background-color: #dae7bb;
+  min-height: 70px;
+  justify-content: flex-start;
+}
+
+.cont {
+  background-color: #dae7bb;
+  min-height: 500px;
+  padding: 20px;
+}
+
+.img {
+  width: 30%;
+
+  img {
+    width: 200px;
+  }
+}
+
+.posts {
+  width: 50%;
+
+  p {
+    font-family: "Times New Roman", Times, serif;
+    font-style: italic;
+    font-weight: 600;
+  }
+}
+
+.title {
+  background-color: #dae7bb;
+  padding: 20px;
+  h1 {
+    margin-bottom: 0px;
+    width: 90%;
+  }
+}
+
+svg {
+  width: 30px;
+  height: 30px;
+  margin-top: 10px;
+}
+
+svg:hover {
+  cursor: pointer;
+}
