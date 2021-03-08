@@ -1,8 +1,10 @@
-<div class="box p-3">
-  <h1 class="mb-5">
-    Our Members
-    <span class="little">- click users to see corresponding posts</span>
-  </h1>
+<div class="box ps-5 pe-5">
+  <div class="title mx-auto">
+    <h1 class="mb-5">
+      Our Members
+      <span class="little">- click users to see corresponding posts</span>
+    </h1>
+  </div>
   <button class="btn btn-success" (click)="toggleUsers()">
     {{ usersVisible ? "Hide" : "Show" }} users
   </button>
@@ -30,7 +32,7 @@
       </tr>
     </thead>
     <tbody *ngIf="usersVisible">
-      <tr *ngFor="let item of filteredUsers" (click)="userClick(item)">
+      <tr *ngFor="let item of filteredUsers" [routerLink]="['/posts', item.id]">
         <td>
           <img [src]="item.img" [alt]="item.name" />
         </td>

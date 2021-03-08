@@ -1,0 +1,41 @@
+.box {
+  background-color: #f8f9fa;
+  min-height: 500px;
+  padding: 0px 40px 40px 40px;
+}
+
+.content {
+  background-color: #e5e9ec;
+  padding: 20px;
+}
+.image {
+  margin: 0 auto;
+  width: 600px;
+
+  img {
+    width: 600px;
+    object-fit: cover;
+  }
+}
+
+.details {
+  min-height: 200px;
+}
+
+.title {
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.bi {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 90px;
+  left: 70px;
+}
+
+svg:hover {
+  cursor: pointer;
+}

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IUserinfo } from './users/user';
+
 
 @Component({
   selector: 'app-root',

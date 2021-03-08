@@ -1,0 +1,25 @@
+<div class="container">
+  <h1>Articles by Our Members</h1>
+  <div class="dropdwn mb-3">
+    <select
+      (change)="changeLanguage($event)"
+      [routerLink]="['/articles', language]"
+    >
+      <option
+        *ngFor="let language of languages"
+        [value]="language.code"
+        [selected]="defaultLanguage == language.languageValue ? true : false"
+      >
+        {{ language.languageValue }}
+      </option>
+    </select>
+  </div>
+  <div class="cardsContainer d-flex">
+    <app-card
+      class="card mb-5"
+      *ngFor="let article of articlesArray"
+      [item]="article"
+      [language]="language"
+    ></app-card>
+  </div>
+</div>

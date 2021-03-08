@@ -1,12 +1,6 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  EventEmitter,
-  Output,
-  Input,
-} from '@angular/core';
-import { IUser, IUserinfo } from './user';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+
+import { IUser } from './user';
 import { IPosts } from './user';
 import { UserService } from './users.service';
 
@@ -16,16 +10,6 @@ import { UserService } from './users.service';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit, OnDestroy {
-  @Output() onClick = new EventEmitter<boolean>();
-  @Output() onClickData = new EventEmitter<any>();
-
-  userClick(item) {
-    this.onClick.emit(true);
-    this.onGetUserData(item);
-  }
-  onGetUserData(item) {
-    this.onClickData.emit(item);
-  }
   usersList: IUser[] = [];
   usersPosts: IPosts[] = [];
 
@@ -76,7 +60,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.usersList = this._usersService.getProducts();
+    this.usersList = this._usersService.getUsers();
     this.searchTerm = '';
   }
 
