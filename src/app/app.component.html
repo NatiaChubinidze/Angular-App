@@ -1,13 +1,2 @@
-<div class="p-5">
-  <app-users
-    *ngIf="!toggleInterface"
-    (onClick)="this.toggleInterface = !this.toggleInterface"
-    (onClickData)="getData($event)"
-  >
-  </app-users>
-  <app-posts
-    *ngIf="toggleInterface"
-    (onIconClick)="toggleInterface = !toggleInterface"
-    [userInfo]="userInfo"
-  ></app-posts>
-</div>
+<app-menu></app-menu>
+<router-outlet></router-outlet>

@@ -5,7 +5,7 @@ import { IUser } from './user';
   providedIn: 'root',
 })
 export class UserService {
-  getProducts(): IUser[] {
+  getUsers(): IUser[] {
     return [
       {
         id: 1,

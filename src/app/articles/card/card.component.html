@@ -1,0 +1,16 @@
+<div class="card">
+  <div class="image">
+    <img [src]="item.urlToImage" class="card-img-top" [alt]="item?.title" />
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ item?.title }}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">{{ item?.source.name }}</h6>
+    <p class="card-text">{{ item?.description }}</p>
+    <a [href]="item?.url" class="card-link" target="_blank">Original Source</a>
+    <a
+      [routerLink]="['/articles-see-more', item?.title, language]"
+      class="card-link"
+      >See More...</a
+    >
+  </div>
+</div>

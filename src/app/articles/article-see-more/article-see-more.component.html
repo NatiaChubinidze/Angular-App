@@ -1,8 +1,7 @@
 <div class="box">
-  <div class="title d-flex">
-    <h1>{{ userInfo.name }}'s Posts</h1>
+  <div class="content">
     <svg
-      [routerLink]="['']"
+      [routerLink]="['/articles', articleLanguage]"
       xmlns="http://www.w3.org/2000/svg"
       width="16"
       height="16"
@@ -19,16 +18,21 @@
         d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"
       />
     </svg>
-  </div>
-  <div class="cont d-flex">
-    <div class="img">
-      <img [src]="userInfo.img" />
+    <div class="title">
+      <h1>{{ currentArticle?.title }}</h1>
+      <h5>
+        <i
+          >By {{ currentArticle?.author }} -
+          {{ currentArticle?.source.name }}</i
+        >
+      </h5>
+      <p>Published at {{ articleDate | date: "shortDate" }}</p>
     </div>
-    <div class="posts">
-      <span *ngFor="let item of usersPosts"
-        ><p>"{{ item.title }}"</p>
-        <hr
-      /></span>
+    <div class="image mb-3">
+      <img [src]="currentArticle?.urlToImage" [alt]="currentArticle?.title" />
+    </div>
+    <div class="details">
+      <p>{{ currentArticle?.content }}</p>
     </div>
   </div>
 </div>
