@@ -21,10 +21,11 @@
   justify-content: flex-end;
 }
 
-select {
+.languages {
   padding: 5px 10px;
   background-color: rgb(245, 238, 238);
+  option {
+    background-color: rgb(240, 234, 234);
+  }
 }
-option {
-  background-color: rgb(240, 234, 234);
-}
+
