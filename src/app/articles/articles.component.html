@@ -17,10 +17,6 @@
       <label for="q" class="form-label">Search Term</label>
       <input type="search" class="form-control" id="q" name="q" [(ngModel)]="form.q">
     </div>
-    <!-- <div class="mb-3 col-3">
-      <label for="source" class="form-label">Source</label>
-      <input type="search" class="form-control" id="source" name="source" [(ngModel)]="form.source">
-    </div> -->
     <div class="mb-3 col-3">
       <label for="sortBy" class="form-label">Sort By</label>
       <select class="form-select" name="sortBy" [(ngModel)]="form.sortBy">
@@ -29,21 +25,6 @@
         <option value="publishedAt">Published At</option>
       </select>
     </div>
-    <!-- <div class="mb-3 col-3">
-      <label for="language" class="form-label">Language</label>
-      <select class="form-select languages" (change)="changeLanguage($event)"
-      [routerLink]="['/articles', language]"
-      id="language" name="language"
-      [(ngModule)]="form.language">
-      <option
-      *ngFor="let language of languages"
-      [value]="language.code"
-      [selected]="defaultLanguage == language.languageValue ? true : false"
-    >
-      {{ language.languageValue }}
-    </option>
-  </select>
-    </div> -->
     <div class="mb-3 col-3">
       <label for="from" class="form-label">From</label>
       <input type="date" class="form-control" id="from"name="from" [(ngModel)]="form.from">

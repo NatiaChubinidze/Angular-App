@@ -13,6 +13,8 @@ import { ArticlesComponent } from './articles/articles.component';
 import { MenuComponent } from './menu/menu.component';
 import { CardComponent } from './articles/card/card.component';
 import { ArticleSeeMoreComponent } from './articles/article-see-more/article-see-more.component';
+import { LoginComponent } from './login/login.component';
+import { LoginGuardGuard } from './login-guard.guard';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { ArticleSeeMoreComponent } from './articles/article-see-more/article-see
     ArticlesComponent,
     CardComponent,
     ArticleSeeMoreComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,11 +48,15 @@ import { ArticleSeeMoreComponent } from './articles/article-see-more/article-see
       },
       {
         path:'home',
-        component:UsersComponent,
+        component:UsersComponent
+      },
+      {
+        path:'login',
+        component:LoginComponent
       },
       {
         path: '',
-        redirectTo: 'home',
+        redirectTo: 'login',
         pathMatch: 'full',
       },
       {
