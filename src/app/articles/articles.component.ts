@@ -3,6 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 
 import { ArticlesService } from './articles.service';
 import { IArticle, ILanguage } from './article-interfaces';
+import { NgForm } from '@angular/forms';
+import { IForm, SortBy } from '../data/filter-form.interface';
+
 
 @Component({
   selector: 'app-articles',
@@ -11,6 +14,12 @@ import { IArticle, ILanguage } from './article-interfaces';
 })
 export class ArticlesComponent implements OnInit, OnDestroy {
   articlesArray: IArticle[];
+  form:IForm={
+    qInTitle:"twitter",
+    pageSize:20,
+    page:2,
+    language:"en"
+  }
   _language: string;
   defaultLanguage: string;
   languages: ILanguage[] = [
@@ -27,6 +36,7 @@ export class ArticlesComponent implements OnInit, OnDestroy {
     private _activeRoute: ActivatedRoute
   ) {
     this._language = this._activeRoute.snapshot.paramMap.get('language');
+    this.form.language=this._language;
   }
   get language(): string {
     return this._language;
@@ -36,26 +46,35 @@ export class ArticlesComponent implements OnInit, OnDestroy {
     this._language = value;
   }
   ngOnInit(): void {
-    this._getArticles
-      .getArticles('technology', 24, 1, this.language)
-      .subscribe((data: IArticle[]) => {
-        this.articlesArray = data['articles'];
-      });
+    this.loadArticles();
     this.defaultLanguage = this.languages.filter(
       (language) => language.code == this.language
     )[0].languageValue;
-    console.log('default language', this.defaultLanguage);
   }
+
+  private loadArticles(){
+    // @ts-ignore
+    const query:string=new URLSearchParams(this.form).toString();
+    this._getArticles
+    .getArticles(query)
+    .subscribe((data: IArticle[]) => {
+      this.articlesArray = data['articles'];
+      console.log(this.articlesArray);
+    });
+
+  }
+
+
+
 
   ngOnDestroy():void {}
   changeLanguage(event): IArticle[] {
     this.language = event.target.value;
-    this._getArticles
-      .getArticles('technology', 24, 1, this.language)
-      .subscribe((data: IArticle[]) => {
-        console.log(this.language);
-        this.articlesArray = data['articles'];
-      });
+    this.loadArticles();
     return this.articlesArray;
+  }
+
+  onFormSubmit(){
+this.loadArticles();
   }
 }

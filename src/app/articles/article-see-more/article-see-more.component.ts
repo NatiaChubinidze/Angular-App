@@ -27,10 +27,10 @@ export class ArticleSeeMoreComponent implements OnInit, OnDestroy {
     this.articleLanguage = this._activeRoute.snapshot.paramMap.get('language');
     console.log(this.articleLanguage);
     this.articlesService
-      .getArticles('technology', 24, 1, this.articleLanguage)
+      .getArticle(this.articleTitle,this.articleLanguage)
       .subscribe((data: IArticle[]) => {
         const articles = data['articles'];
-
+        console.log(data);
         this.currentArticle = articles.filter((item) => {
           return this.articleTitle == item.title;
         })[0];
