@@ -13,4 +13,5 @@ export class AppComponent {
   getData($event) {
     this.userInfo = $event;
   }
+  loggedIn=localStorage.getItem("token");
 }

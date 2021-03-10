@@ -1,9 +1,49 @@
 <div class="container">
   <h1>Articles by Our Members</h1>
+  <form class="row" #filterform="ngForm" (ngSubmit)="onFormSubmit()">
+    <div class="mb-3 col-3">
+      <label for="qInTitle" class="form-label">Title</label>
+      <input type="search" class="form-control" id="qInTitle" name="qInTitle" [(ngModel)]="form.qInTitle">
+    </div>
+    <div class="mb-3 col-3">
+      <label for="pageSize" class="form-label">pageSize</label>
+      <input type="number" class="form-control" id="pageSize" name="pageSize" [(ngModel)]="form.pageSize">
+    </div>
+    <div class="mb-3 col-3">
+      <label for="page" class="form-label">Page</label>
+      <input type="number" class="form-control" id="page" name="page" [(ngModel)]="form.page">
+    </div>
+    <div class="mb-3 col-3">
+      <label for="q" class="form-label">Search Term</label>
+      <input type="search" class="form-control" id="q" name="q" [(ngModel)]="form.q">
+    </div>
+    <div class="mb-3 col-3">
+      <label for="sortBy" class="form-label">Sort By</label>
+      <select class="form-select" name="sortBy" [(ngModel)]="form.sortBy">
+        <option value="popularity">Popularity</option>
+        <option value="relevancy">Relevancy</option>
+        <option value="publishedAt">Published At</option>
+      </select>
+    </div>
+    <div class="mb-3 col-3">
+      <label for="from" class="form-label">From</label>
+      <input type="date" class="form-control" id="from"name="from" [(ngModel)]="form.from">
+    </div>
+    <div class="mb-3 col-3">
+      <label for="to" class="form-label">To</label>
+      <input type="date" class="form-control" id="to" name="to" [(ngModel)]="form.to">
+    </div>
+    <div class="col-12">
+    <button type="submit" class="btn btn-warning col-1">Search</button>
+    </div>
+  </form>
+  {{form |json}}
   <div class="dropdwn mb-3">
-    <select
+    <select class="languages"
       (change)="changeLanguage($event)"
       [routerLink]="['/articles', language]"
+      id="language" name="language"
+      [(ngModel)]="form.language"
     >
       <option
         *ngFor="let language of languages"

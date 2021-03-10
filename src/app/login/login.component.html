@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="keywords"
+          content="unique login form,leamug login form,boostrap login form,responsive login form,free css html login form,download login form">
+    <meta name="author" content="leamug">
+    <title>Unique Login Form | Bootstrap Templates</title>
+    
+
+</head>
+<body>
+
+<!-- Page Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-offset-5 col-md-4 text-center">
+            <h1 class='text-white'>Please, Sign in</h1>
+              <div class="form-login">
+                <h4>Secure Login</h4>
+                
+                <input type="text" id="email" name="email" class="form-control input-sm chat-input" placeholder="username" value="eve.holt@reqres.in" [(ngModel)]="userInfo.email"/>
+               
+                <input type="text" id="password" name="password" class="form-control input-sm chat-input" placeholder="password" value="cityslicka" [(ngModel)]="userInfo.password"/>
+                
+                <div class="wrapper">
+                        <span class="group-btn">
+                            <button  [routerLink]="['/home']" class="btn btn-danger btn-md mt-3" (click)="authorize()">login <i class="fa fa-sign-in"></i></button>
+                        </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+</div>
+</body>
+</html>
