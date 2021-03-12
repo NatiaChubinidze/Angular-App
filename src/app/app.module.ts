@@ -5,60 +5,29 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { capitalize } from './pipes/pipes';
-import { UsersComponent } from './users/users.component';
-import { PostsComponent } from './posts/posts.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
-import { ArticlesComponent } from './articles/articles.component';
 import { MenuComponent } from './menu/menu.component';
-import { CardComponent } from './articles/card/card.component';
-import { ArticleSeeMoreComponent } from './articles/article-see-more/article-see-more.component';
-import { LoginComponent } from './login/login.component';
 import { LoginGuardGuard } from './login-guard.guard';
+
+
+import { ArticleModule } from './articles/article.module';
+import { LoginModule } from './login/login.module';
+import { HomeModule } from './home/home/home.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UsersComponent,
-    capitalize,
-    PostsComponent,
     PagenotfoundComponent,
     MenuComponent,
-    ArticlesComponent,
-    CardComponent,
-    ArticleSeeMoreComponent,
-    LoginComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    ArticleModule,
+    LoginModule,
+    HomeModule,
     RouterModule.forRoot([
-      {
-        path: 'articles-see-more/:title/:language',
-        component: ArticleSeeMoreComponent,
-      },
-      {
-        path: 'articles/:language',
-        component: ArticlesComponent,
-      },
-      {
-        path: 'posts/:id',
-        component: PostsComponent,
-      },
-      {
-        path:'home',
-        component:UsersComponent
-      },
-      {
-        path:'login',
-        component:LoginComponent
-      },
-      {
-        path: '',
-        redirectTo: 'login',
-        pathMatch: 'full',
-      },
       {
         path: '**',
         component: PagenotfoundComponent,
