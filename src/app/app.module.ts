@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -13,6 +13,7 @@ import { LoginGuardGuard } from './login-guard.guard';
 import { ArticleModule } from './articles/article.module';
 import { LoginModule } from './login/login.module';
 import { HomeModule } from './home/home/home.module';
+import { ArticleHeaderInterceptorService } from './articles/add-header.interceptor.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,13 @@ import { HomeModule } from './home/home/home.module';
       },
     ]),
   ],
-  providers: [HttpClientModule],
+  providers: [
+    HttpClientModule,
+    { provide:HTTP_INTERCEPTORS,
+      useClass:ArticleHeaderInterceptorService,
+      multi:true
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
