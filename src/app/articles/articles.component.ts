@@ -45,18 +45,22 @@ export class ArticlesComponent implements OnInit, OnDestroy {
     this._language = value;
   }
   ngOnInit(): void {
-    this.loadArticles();
+    // this.loadArticles();
+
+    const result:IArticle[]=this._activeRoute.snapshot.data['articlesResponse'];
+    this.articlesArray=result["articles"];
+    
+
     this.defaultLanguage = this.languages.filter(
       (language) => language.code == this.language
     )[0].languageValue;
   }
 
   private loadArticles() {
-    // @ts-ignore
-    const query: string = new URLSearchParams(this.form).toString();
+    const query: string = new URLSearchParams(this.form as any).toString();
     this._getArticles.getArticles(query).subscribe((data: IArticle[]) => {
       this.articlesArray = data['articles'];
-      console.log(this.articlesArray);
+      
     });
   }
 
