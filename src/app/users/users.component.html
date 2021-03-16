@@ -1,7 +1,7 @@
 <div class="box ps-5 pe-5">
   <div class="title mx-auto">
     <h1 class="mb-5">
-      Our Members
+      Our Top Members
       <span class="little">- click users to see corresponding posts</span>
     </h1>
   </div>
@@ -14,7 +14,14 @@
       type="search"
       placeholder="Search users"
       [(ngModel)]="searchTerm"
-    />
+    /><img
+    *ngFor="
+      let member of membersArray
+        | paginate
+          : { itemsPerPage: 3, currentPage: p, totalItems: membersArray.length }
+    "
+    [src]="member.avatar"
+  />
   </div>
   <div class="d-inline-block col-4 ms-3">
     <b> Searching for: </b> {{ searchTerm }}
