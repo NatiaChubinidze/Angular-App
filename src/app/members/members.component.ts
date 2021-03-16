@@ -10,18 +10,15 @@ import { MembersService } from './members.service';
 })
 export class MembersComponent implements OnInit, OnDestroy {
   membersArray: IMemberInfo[];
-  
-  constructor(private _memberService: MembersService, private _route:ActivatedRoute) {}
 
-  // getMembers() {
-  //   this._memberService.getAllMembers().subscribe((result: IMember) => {
-  //     this.membersArray = result.data;
-  //   });
-  //}
+  constructor(
+    private _memberService: MembersService,
+    private _route: ActivatedRoute
+  ) {}
+
   ngOnInit(): void {
-    // this.getMembers();
-    const result:IMember=this._route.snapshot.data['membersResponse'];
-    this.membersArray=result.data;
+    const result: IMember = this._route.snapshot.data['membersResponse'];
+    this.membersArray = result.data;
     console.log(this.membersArray);
   }
   ngOnDestroy(): void {}
