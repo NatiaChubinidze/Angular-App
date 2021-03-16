@@ -2,8 +2,7 @@
   <div
     *ngFor="
       let member of membersArray
-        | paginate
-          : { itemsPerPage: 3, currentPage: p, totalItems: membersArray.length }
+        | paginate : { itemsPerPage: 3, currentPage: p, totalItems: membersArray.length }
     "
   >
     <img [src]="member.avatar" />

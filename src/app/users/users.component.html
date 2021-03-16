@@ -14,14 +14,7 @@
       type="search"
       placeholder="Search users"
       [(ngModel)]="searchTerm"
-    /><img
-    *ngFor="
-      let member of membersArray
-        | paginate
-          : { itemsPerPage: 3, currentPage: p, totalItems: membersArray.length }
-    "
-    [src]="member.avatar"
-  />
+    />
   </div>
   <div class="d-inline-block col-4 ms-3">
     <b> Searching for: </b> {{ searchTerm }}
