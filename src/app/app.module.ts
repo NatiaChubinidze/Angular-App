@@ -7,13 +7,15 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { MenuComponent } from './menu/menu.component';
-import { LoginGuardGuard } from './login-guard.guard';
+
 
 
 import { ArticleModule } from './articles/article.module';
 import { LoginModule } from './login/login.module';
 import { HomeModule } from './home/home/home.module';
-import { ArticleHeaderInterceptorService } from './articles/add-header.interceptor.service';
+import { MembersModule } from './members/members.module';
+
+
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { ArticleHeaderInterceptorService } from './articles/add-header.intercept
     ArticleModule,
     LoginModule,
     HomeModule,
+    MembersModule,
     RouterModule.forRoot([
       {
         path: '**',
@@ -37,10 +40,6 @@ import { ArticleHeaderInterceptorService } from './articles/add-header.intercept
   ],
   providers: [
     HttpClientModule,
-    { provide:HTTP_INTERCEPTORS,
-      useClass:ArticleHeaderInterceptorService,
-      multi:true
-    }
   ],
   bootstrap: [AppComponent],
 })

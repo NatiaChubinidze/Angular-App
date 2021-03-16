@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 
 import { ArticlesService } from './articles.service';
 import { IArticle, ILanguage } from './article-interfaces';
-import { NgForm } from '@angular/forms';
 import { IForm, SortBy } from '../data/filter-form.interface';
 
 @Component({

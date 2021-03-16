@@ -8,6 +8,9 @@ import { CardComponent } from './card/card.component';
 import { ArticleSeeMoreComponent } from './article-see-more/article-see-more.component';
 import { LoginGuardGuard } from '../login-guard.guard';
 import {ArticleResolverService} from './article-resolver.service'
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ArticleHeaderInterceptorService } from './add-header.interceptor.service';
+import { HttpCacheInterceptorService } from '../core/http-cache.interceptor';
 
 
 @NgModule({
@@ -31,6 +34,19 @@ import {ArticleResolverService} from './article-resolver.service'
         component: ArticleSeeMoreComponent,
       }
     ])
-  ]
+  ],
+  providers:[
+  { provide:HTTP_INTERCEPTORS,
+    useClass:ArticleHeaderInterceptorService,
+    multi:true
+  },
+  { provide:HTTP_INTERCEPTORS,
+    useClass:HttpCacheInterceptorService,
+    multi:true
+  }
+],
+exports:[
+  ArticlesComponent
+],
 })
 export class ArticleModule { }
