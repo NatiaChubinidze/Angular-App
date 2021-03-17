@@ -23,11 +23,10 @@ export class ArticleSeeMoreComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.articleTitle = this._activeRoute.snapshot.paramMap.get('title');
-    console.log(this.articleTitle);
     this.articleLanguage = this._activeRoute.snapshot.paramMap.get('language');
-    console.log(this.articleLanguage);
+
     this.articlesService
-      .getArticle(this.articleTitle,this.articleLanguage)
+      .getArticle(this.articleTitle, this.articleLanguage)
       .subscribe((data: IArticle[]) => {
         const articles = data['articles'];
         console.log(data);
@@ -39,5 +38,5 @@ export class ArticleSeeMoreComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy():void {}
+  ngOnDestroy(): void {}
 }

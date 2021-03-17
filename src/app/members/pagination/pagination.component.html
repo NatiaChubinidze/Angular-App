@@ -1,0 +1,14 @@
+<div class="cont d-flex">
+  <div
+    *ngFor="
+      let member of membersArray
+        | paginate : { itemsPerPage: 3, currentPage: p, totalItems: membersArray.length }
+    "
+  >
+    <img [src]="member.avatar" />
+    <p>{{ member.first_name }} {{ " " }} {{ member.last_name }}</p>
+  </div>
+</div>
+<div class="pagination-controls">
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
