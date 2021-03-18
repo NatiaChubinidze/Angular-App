@@ -9,6 +9,7 @@ import { MembersComponent } from './members.component';
 import { HttpCacheInterceptorService } from '../core/http-cache.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PaginationComponent } from './pagination/pagination.component';
+import { LoginGuardGuard } from '../login-guard.guard';
 
 @NgModule({
   declarations: [MembersComponent, PaginationComponent],
@@ -19,6 +20,7 @@ import { PaginationComponent } from './pagination/pagination.component';
       {
         path: 'members',
         component: MembersComponent,
+        canActivate:[LoginGuardGuard],
         resolve: {
           membersResponse: MemberResolverService,
         },

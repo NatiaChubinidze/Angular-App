@@ -26,12 +26,14 @@ import { HttpCacheInterceptorService } from '../core/http-cache.interceptor';
       {
         path: 'articles/:language',
         component: ArticlesComponent,
+        canActivate:[LoginGuardGuard],
         resolve:{
           articlesResponse:ArticleResolverService
         }
       },{
         path: 'articles-see-more/:title/:language',
         component: ArticleSeeMoreComponent,
+        canActivate:[LoginGuardGuard],
       }
     ])
   ],

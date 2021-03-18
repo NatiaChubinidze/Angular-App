@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { UsersComponent } from 'src/app/users/users.component';
 import { capitalize } from 'src/app/pipes/pipes';
 import { PostsComponent } from 'src/app/posts/posts.component';
+import { LoginGuardGuard } from 'src/app/login-guard.guard';
 
 
 
@@ -22,10 +23,12 @@ import { PostsComponent } from 'src/app/posts/posts.component';
       {
         path: 'posts/:id',
         component: PostsComponent,
+        canActivate:[LoginGuardGuard]
       },
       {
         path:'home',
         component:UsersComponent,
+        
       },
       {
         path: '',
