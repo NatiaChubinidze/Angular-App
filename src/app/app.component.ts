@@ -1,17 +1,21 @@
-import { Component, Input } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'my-angular-app';
-  @Input() toggleInterface = false;
-  @Input() userInfo = {};
-  getData($event) {
-    this.userInfo = $event;
+  loggedIn = localStorage.getItem('token');
+
+  ngOnInit() {
+    const interval = setInterval(() => {
+      //if (this.loggedIn) {
+        //clearInterval(interval);
+      //} else {
+        this.loggedIn = localStorage.getItem('token');
+     // }
+    }, 1000);
   }
-  loggedIn=localStorage.getItem("token");
 }

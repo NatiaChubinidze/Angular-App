@@ -1,29 +1,77 @@
-import { Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { tap, catchError } from 'rxjs/operators';
+import { tap, map,catchError } from 'rxjs/operators';
+
 import { IToken, IUserInfo } from '../data/user-info.interface';
-
-
+import {
+  TOKEN_KEY,
+  TOKEN_EXP_KEY,
+  TOKEN_TTL,
+  EXP_TIME,
+} from '../data/constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
   private _baseURL = 'https://reqres.in';
- options = {
+  options = {
     headers: {
-      "Content-Type": "application/json",
-    }
+      'Content-Type': 'application/json',
+    },
   };
   constructor(private http: HttpClient) {}
 
-  getToken(data): Observable<IToken> {
-      const dataa=JSON.stringify(data);
-    // return this.http
-    //   .post<IToken>(`${this._baseURL}/api/login`,JSON.stringify(data),this.options)
-    //   .pipe(tap((data) => {}, catchError(this.handleError)));
-      return this.http.post<IToken>("https://reqres.in/api/login",dataa,this.options);
+  getToken(inputData): Observable<boolean> {
+    const data = JSON.stringify(inputData);
+    return this.http
+      .post<IToken>(`${this._baseURL}/api/login`, data, this.options)
+      .pipe(
+        tap((data) => {
+          localStorage.setItem(TOKEN_KEY, data.token);
+          this.setTokenValidTime();
+        }),catchError(this.handleError),
+        map((data) => {
+          if (data.token) {
+            return true;
+          } else {
+            return false;
+          }
+        })
+      );
+    
+  }
+
+  setTokenValidTime():void{
+    const date = new Date();
+    date.setMinutes(new Date().getMinutes()+TOKEN_TTL);
+    localStorage.setItem(TOKEN_EXP_KEY,date.toJSON());
+  }
+
+  tokenIsValid():boolean{
+    const timeNow = new Date().getTime();
+    const tokenValidTill=new Date(localStorage.getItem(TOKEN_EXP_KEY)).getTime();
+    return timeNow < tokenValidTill;
+  }
+  
+  authIsSecure():boolean{
+    const timeNow=new Date().getTime();
+    console.log("time now",timeNow);
+    const tokenValidTill=new Date(localStorage.getItem(TOKEN_EXP_KEY)).getTime();
+    console.log("token valid till",tokenValidTill);
+    console.log("sxvaoba",timeNow - tokenValidTill);
+    return tokenValidTill - timeNow > 20000;
+    }
+
+  signOut():void{
+    localStorage.removeItem(TOKEN_KEY);
+  }
+
+  isSignedIn():boolean{
+    if(localStorage.getItem(TOKEN_KEY)){
+      return true;
+    } else return false;
   }
 
   private handleError(error: HttpErrorResponse) {
