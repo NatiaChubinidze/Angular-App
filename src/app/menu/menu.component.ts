@@ -14,7 +14,6 @@ export class MenuComponent implements OnInit {
   ngOnInit(): void {
     setInterval(()=>{
       if(!this._loginService.tokenIsValid()){
-        console.log("sessionExpired. Refresh the token");
         this._loginService.signOut();
         localStorage.removeItem(TOKEN_EXP_KEY);
         this._router.navigate(['/login']);

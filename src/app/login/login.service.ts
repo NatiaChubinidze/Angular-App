@@ -57,11 +57,8 @@ export class LoginService {
   
   authIsSecure():boolean{
     const timeNow=new Date().getTime();
-    console.log("time now",timeNow);
     const tokenValidTill=new Date(localStorage.getItem(TOKEN_EXP_KEY)).getTime();
-    console.log("token valid till",tokenValidTill);
-    console.log("sxvaoba",timeNow - tokenValidTill);
-    return tokenValidTill - timeNow > 20000;
+    return tokenValidTill - timeNow > 30000;
     }
 
   signOut():void{

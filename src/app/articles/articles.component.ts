@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 
 import { ArticlesService } from './articles.service';
 import { IArticle, ILanguage } from './article-interfaces';
-import { IForm, SortBy } from '../data/filter-form.interface';
+import { IForm } from '../data/filter-form.interface';
 
 @Component({
   selector: 'app-articles',
@@ -12,12 +12,7 @@ import { IForm, SortBy } from '../data/filter-form.interface';
 })
 export class ArticlesComponent implements OnInit, OnDestroy {
   articlesArray: IArticle[];
-  form: IForm = {
-    qInTitle: 'twitter',
-    pageSize: 20,
-    page: 2,
-    language: 'en',
-  };
+  form:IForm | undefined;
   _language: string;
   defaultLanguage: string;
   languages: ILanguage[] = [
@@ -31,10 +26,11 @@ export class ArticlesComponent implements OnInit, OnDestroy {
   ];
   constructor(
     private _getArticles: ArticlesService,
-    private _activeRoute: ActivatedRoute
+    private _activeRoute: ActivatedRoute,
+    private route:Router
   ) {
     this._language = this._activeRoute.snapshot.paramMap.get('language');
-    this.form.language = this._language;
+    this._getArticles.form.language = this._language;
   }
   get language(): string {
     return this._language;
@@ -53,9 +49,24 @@ export class ArticlesComponent implements OnInit, OnDestroy {
     this.defaultLanguage = this.languages.filter(
       (language) => language.code == this.language
     )[0].languageValue;
+    this.form=this._getArticles.form;
   }
 
   private loadArticles() {
+    
+    const params={
+      ...this.form,
+      qInTitle:this.form.qInTitle,
+        pageSize:this.form.pageSize,
+        page:this.form.page,
+        language:this.form.language
+    }
+    console.log(this.form);
+    this.route.navigate([],{
+      queryParamsHandling:'merge',
+      replaceUrl:true,
+      queryParams:params
+    })
     const query: string = new URLSearchParams(this.form as any).toString();
     this._getArticles.getArticles(query).subscribe((data: IArticle[]) => {
       this.articlesArray = data['articles'];
@@ -64,10 +75,11 @@ export class ArticlesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {}
-  changeLanguage(event): IArticle[] {
+  changeLanguage(event) {
     this.language = event.target.value;
+    this.form.language=this.language;
     this.loadArticles();
-    return this.articlesArray;
+  
   }
 
   onFormSubmit() {

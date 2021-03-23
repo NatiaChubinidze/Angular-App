@@ -4,11 +4,18 @@ import { Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 
 import { IArticle } from '../articles/article-interfaces';
+import { IForm } from '../data/filter-form.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ArticlesService {
+  public form: IForm = {
+    qInTitle: 'twitter',
+    pageSize: 20,
+    page: 2,
+    language: 'en',
+  };
   private _BASE_URL: string = 'https://newsapi.org/v2';
   constructor(private http: HttpClient) {}
   createRequest(q: string): string {
