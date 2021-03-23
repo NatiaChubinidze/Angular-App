@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Output, EventEmitter } from '@angular/core';
 
 import { IToken, IUserInfo } from '../data/user-info.interface';
 import { LoginService } from './login.service';

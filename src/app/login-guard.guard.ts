@@ -14,7 +14,7 @@ export class LoginGuardGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       if(!this._loginService.authIsSecure()){
       this.router.navigate(["/home"]);
-      console.log("not enought time", this._loginService.authIsSecure());
+      console.log("Not Enough Time");
       } 
     return true;
   }

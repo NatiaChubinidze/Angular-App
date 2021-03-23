@@ -21,12 +21,24 @@ export class ArticleResolverService implements Resolve<IArticle[]> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<IArticle[]> {
+    const qInTitle:any=route.queryParamMap.get("qInTitle") || "facebook";
+    const pageSize:any=route.queryParamMap.get("pageSize") || 20;
+    const page:any=route.queryParamMap.get("page") || 1;
+    const sortBy:any=route.queryParamMap.get("sortBy") || '';
+    const language:any=route.queryParamMap.get("language") || 'en';
+    const from:any=route.queryParamMap.get("from") || '';
+    const to:any=route.queryParamMap.get("to") || '';
+
     const form: IForm = {
-      qInTitle: 'twitter',
-      pageSize: 20,
-      page: 2,
-      language: 'en',
+      qInTitle:qInTitle,
+      pageSize:pageSize,
+      page:page,
+      sortBy:sortBy,
+      language:language,
+      from:from,
+      to:to
     };
+    this._articleService.form=form;
     const query: string = new URLSearchParams(form as any).toString();
     return this._articleService
       .getArticles(query)

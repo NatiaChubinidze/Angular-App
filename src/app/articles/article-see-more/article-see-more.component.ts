@@ -12,7 +12,7 @@ import { ArticlesService } from '../articles.service';
 export class ArticleSeeMoreComponent implements OnInit, OnDestroy {
   articleTitle: string;
   articleLanguage: string;
-  currentArticle: IArticleDetails;
+  currentArticle?: IArticleDetails;
   articleDate: Date;
   constructor(
     private _activeRoute: ActivatedRoute,
@@ -23,6 +23,7 @@ export class ArticleSeeMoreComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.articleTitle = this._activeRoute.snapshot.paramMap.get('title');
+    console.log(this.articleTitle);
     this.articleLanguage = this._activeRoute.snapshot.paramMap.get('language');
 
     this.articlesService
@@ -31,6 +32,7 @@ export class ArticleSeeMoreComponent implements OnInit, OnDestroy {
         const articles = data['articles'];
         console.log(data);
         this.currentArticle = articles.filter((item) => {
+          console.log()
           return this.articleTitle == item.title;
         })[0];
         console.log(this.currentArticle);

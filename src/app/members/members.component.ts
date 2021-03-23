@@ -19,7 +19,6 @@ export class MembersComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const result: IMember = this._route.snapshot.data['membersResponse'];
     this.membersArray = result.data;
-    console.log(this.membersArray);
   }
   ngOnDestroy(): void {}
 }
