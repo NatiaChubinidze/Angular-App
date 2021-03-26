@@ -24,10 +24,10 @@ export class ArticleResolverService implements Resolve<IArticle[]> {
     const qInTitle:any=route.queryParamMap.get("qInTitle") || "facebook";
     const pageSize:any=route.queryParamMap.get("pageSize") || 20;
     const page:any=route.queryParamMap.get("page") || 1;
-    const sortBy:any=route.queryParamMap.get("sortBy") || '';
+    const sortBy:any=route.queryParamMap.get("sortBy") || null;
     const language:any=route.queryParamMap.get("language") || 'en';
-    const from:any=route.queryParamMap.get("from") || '';
-    const to:any=route.queryParamMap.get("to") || '';
+    const from:any=route.queryParamMap.get("from") || null;
+    const to:any=route.queryParamMap.get("to") || null;
 
     const form: IForm = {
       qInTitle:qInTitle,
