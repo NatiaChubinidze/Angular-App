@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule} from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -14,6 +14,8 @@ import { ArticleModule } from './articles/article.module';
 import { LoginModule } from './login/login.module';
 import { HomeModule } from './home/home/home.module';
 import { MembersModule } from './members/members.module';
+import { ProfileComponent } from './profile/profile.component';
+import { ProfileModule } from './profile/profile.module';
 
 
 
@@ -22,6 +24,7 @@ import { MembersModule } from './members/members.module';
     AppComponent,
     PagenotfoundComponent,
     MenuComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,12 +34,14 @@ import { MembersModule } from './members/members.module';
     LoginModule,
     HomeModule,
     MembersModule,
+    ProfileModule,
     RouterModule.forRoot([
       {
         path: '**',
         component: PagenotfoundComponent,
       },
     ]),
+    
   ],
   providers: [
     HttpClientModule,
