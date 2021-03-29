@@ -1,0 +1,53 @@
+<h1 class="text-center mt-2">We'd love to get your feedback about articles</h1>
+<h4 class="text-center mb-5"> Feel free to send us your opinions</h4>
+
+<div class="container d-flex">
+<div class="col-5 p-5 form">
+<form (ngSubmit)="onSubmit()">
+    <div class="profile-img">
+        <img [src]="imgSrc" alt=""/>
+        <div class="file btn btn-lg btn-primary">
+            Attach Photo
+            <input type="file" accept="image/*" name="file" (change)="showPreviewImage($event)"/>
+        </div>
+    </div>
+    <div class="mb-3">
+      <label for="eemail" class="form-label">Your Email address</label>
+      <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" autocomplete="off" [(ngModel)]="recommendation.email">
+      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+    <div class="mb-3">
+        <label for="articleTitle" class="form-label">Article Title</label>
+        <input type="text" class="form-control" id="articleTitle" autocomplete="off"
+        name="articleTitle" [(ngModel)]="recommendation.articleTitle">
+      </div>
+      <div class="mb-3">
+        <label for="articleAuthor" class="form-label">Article Author</label>
+        <input type="text" class="form-control" id="articleAuthor" autocomplete="off"
+        name="articleAuthor" [(ngModel)]="recommendation.articleAuthor">
+      </div>
+      <div class="mb-3">
+        <label for="opinion" class="form-label">Your Opinion</label>
+        <input type="text" class="form-control" id="opinion" autocomplete="off"
+        name="opinion"  [(ngModel)]="recommendation.opinion">
+      </div>
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="recommend" autocomplete="off"
+      name="recommend"  [(ngModel)]="recommendation.recommend">
+      <label class="form-check-label" for="recommend">Recommend</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  {{recommendation |json}}
+</div>
+
+
+
+<div class="col-7 p-2 ms-4 recommendations" *ngIf="recommendationsArray">
+  <div *ngFor="let recommendation of recommendationsArray" class="recommendation">
+    <app-recommendation-card [recommendation]="recommendation" (onEditClick)="editRecommendation($event)" (onDeleteClick)="deleteRecommendation($event)">
+    </app-recommendation-card>
+    </div>
+
+</div>
+</div>
