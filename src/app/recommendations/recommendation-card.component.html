@@ -1,0 +1,17 @@
+
+<div class="card mb-3">
+  <div>
+    <img [src]="recommendation.img" class="card-img-top" alt="article image"> 
+    <div class="card-body">
+      <div class="edit-delete">
+        <img class="edit me-2" (click)="onEditIconClick()" src="https://image.flaticon.com/icons/png/128/1159/1159633.png"/>
+        <img class="delete" (click)="onDeleteIconClick()" src="https://image.flaticon.com/icons/png/128/1345/1345823.png"/>
+      </div>
+      <h5 class="card-title">{{recommendation.articleTitle}} by {{recommendation.articleAuthor}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{recommendation.email}}</h6>
+      
+      <p class="card-text"><i>{{recommendation.opinion}}</i></p>
+      <button class="btn btn-disabled" *ngIf="recommendation.recommend"><b>Recommended</b></button>
+    </div>
+  </div>
+</div>

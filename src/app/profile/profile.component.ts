@@ -37,7 +37,6 @@ export class ProfileComponent implements OnInit {
   async saveChanges(){
     console.log("saving");
     console.log(this.profileInfo);
-    console.log(this.newInfo);
     const result=await this._fireStoreService.saveUserInfo('Profiles',this.profileInfo.id,this.profileInfo);
   }
 }

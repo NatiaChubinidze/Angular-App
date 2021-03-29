@@ -16,6 +16,7 @@ import { HomeModule } from './home/home/home.module';
 import { MembersModule } from './members/members.module';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileModule } from './profile/profile.module';
+import { RecommendationsModule } from './recommendations/recommendations.module';
 
 
 
@@ -25,6 +26,7 @@ import { ProfileModule } from './profile/profile.module';
     PagenotfoundComponent,
     MenuComponent,
     ProfileComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -35,12 +37,14 @@ import { ProfileModule } from './profile/profile.module';
     HomeModule,
     MembersModule,
     ProfileModule,
+    RecommendationsModule,
     RouterModule.forRoot([
       {
         path: '**',
         component: PagenotfoundComponent,
       },
     ]),
+    
     
   ],
   providers: [
