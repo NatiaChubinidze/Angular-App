@@ -1,4 +1,4 @@
 *********************
 My First Angular App
 *********************
-Project link on Netlify - https://gifted-hypatia-d1d17a.netlify.app/
+Project link on Netlify - https://cocky-payne-1b5ce7.netlify.app
