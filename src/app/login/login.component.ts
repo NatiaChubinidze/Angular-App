@@ -1,8 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { IToken, IUserInfo } from '../data/user-info.interface';
+import { AngularFireAuth } from '@angular/fire/auth';
+import {  IUserInfo } from '../data/user-info.interface';
 import { LoginService } from './login.service';
+import firebase from 'firebase/app';
+
+
+import {
+  TOKEN_KEY,
+  TOKEN_EXP_KEY,
+  TOKEN_TTL,
+  EXP_TIME,
+} from '../data/constants';
 
 @Component({
   selector: 'app-login',
@@ -15,14 +24,24 @@ export class LoginComponent implements OnInit {
     password: 'cityslicka',
   };
 
-  constructor(private _getUserService: LoginService, private _router: Router) {}
+  googleAuth:boolean;
+  constructor(private _getUserService: LoginService, private _router: Router,public auth: AngularFireAuth) {}
 
   ngOnInit(): void {
     if(localStorage.getItem("token")){
       this._router.navigate(['/home']);
     }
   }
-
+  login() {
+    this._getUserService.googleAuth=true;
+    this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then((data:any)=>{
+      if(data.credential.accessToken){this._router.navigate(['/home'])}
+      localStorage.setItem(TOKEN_KEY,data.credential.accessToken);
+      localStorage.setItem("REFRESH_TOKEN",data.user.refreshToken);
+      this._getUserService.setTokenValidTime();
+      
+    });
+  }
   authorize() {
     this._getUserService
       .getToken(this.userInfo)
