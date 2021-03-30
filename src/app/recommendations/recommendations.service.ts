@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { IRecommendation } from '../data/recommendations.interface';
 
 @Injectable({
@@ -10,7 +9,7 @@ import { IRecommendation } from '../data/recommendations.interface';
 export class FireBaseRecommendationService {
   constructor(
     private _firebaseStore: AngularFirestore,
-    private _firebase: AngularFireDatabase
+   
   ) {}
 
   getCollection(collection: string) {

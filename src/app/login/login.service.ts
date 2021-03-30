@@ -21,6 +21,8 @@ export class LoginService {
       'Content-Type': 'application/json',
     },
   };
+
+  googleAuth:boolean;
   constructor(private http: HttpClient) {}
 
   getToken(inputData): Observable<boolean> {
@@ -58,11 +60,12 @@ export class LoginService {
   authIsSecure():boolean{
     const timeNow=new Date().getTime();
     const tokenValidTill=new Date(localStorage.getItem(TOKEN_EXP_KEY)).getTime();
-    return tokenValidTill - timeNow > 30000;
+    return tokenValidTill - timeNow > 3000;
     }
 
   signOut():void{
     localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(TOKEN_EXP_KEY);
   }
 
   isSignedIn():boolean{

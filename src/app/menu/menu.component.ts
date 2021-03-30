@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login/login.service';
 import { Router } from '@angular/router';
-import { EXP_TIME, TOKEN_EXP_KEY } from '../data/constants';
+import { AngularFireAuth } from '@angular/fire/auth';
+import firebase from 'firebase/app';
+import { EXP_TIME, TOKEN_EXP_KEY, TOKEN_KEY } from '../data/constants';
 
 @Component({
   selector: 'app-menu',
@@ -9,20 +11,36 @@ import { EXP_TIME, TOKEN_EXP_KEY } from '../data/constants';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
-  constructor(private _loginService:LoginService, private _router:Router) {}
+  constructor(
+    private _loginService: LoginService,
+    private _router: Router,
+    public auth: AngularFireAuth
+  ) {}
 
   ngOnInit(): void {
-    setInterval(()=>{
-      if(!this._loginService.tokenIsValid()){
+    setInterval(() => {
+      if (!this._loginService.tokenIsValid()) {
+        if (this._loginService.googleAuth) {
+          firebase
+            .auth()
+            .currentUser.getIdToken(true)
+            .then((token) => localStorage.setItem(TOKEN_KEY, token))
+            .catch(()=>{});
+        }
         this._loginService.signOut();
-        localStorage.removeItem(TOKEN_EXP_KEY);
+        if (TOKEN_EXP_KEY) {
+          localStorage.removeItem(TOKEN_EXP_KEY);
+        }
         this._router.navigate(['/login']);
       }
-    },EXP_TIME);
-    
+    }, EXP_TIME);
   }
 
-  onSignOut(){
+  onSignOut() {
+    if (this._loginService.googleAuth) {
+      this.auth.signOut();
+      this._loginService.googleAuth = false;
+    }
     this._loginService.signOut();
     this._router.navigate(['/login']);
   }

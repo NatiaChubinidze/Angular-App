@@ -17,6 +17,8 @@ import { MembersModule } from './members/members.module';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileModule } from './profile/profile.module';
 import { RecommendationsModule } from './recommendations/recommendations.module';
+import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 
@@ -38,6 +40,15 @@ import { RecommendationsModule } from './recommendations/recommendations.module'
     MembersModule,
     ProfileModule,
     RecommendationsModule,
+    BrowserAnimationsModule,
+    NgxAuthFirebaseUIModule.forRoot({
+                    apiKey: "AIzaSyD0a0aNycl38R5ZqYtn74ZI23Nr29oUZV8",
+                    authDomain: "angular-app-c3640.firebaseapp.com",
+                    databaseURL: 'https://console.firebase.google.com/project/angular-app-c3640/firestore/data~2FProfiles~2FZo8ANYfd49mUPGGlTKWs',
+                    projectId: "angular-app-c3640",
+                    storageBucket: "angular-app-c3640.appspot.com",
+                    messagingSenderId: "1013847471149"
+                }),
     RouterModule.forRoot([
       {
         path: '**',
