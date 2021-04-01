@@ -3,12 +3,12 @@
 
 <div class="container d-flex">
 <div class="col-5 p-5 form">
-<form (ngSubmit)="onSubmit()">
+<form (ngSubmit)="onSubmit($event)">
     <div class="profile-img">
         <img [src]="imgSrc" alt=""/>
         <div class="file btn btn-lg btn-primary">
             Attach Photo
-            <input type="file" accept="image/*" name="file" (change)="showPreviewImage($event)"/>
+            <input #myInput type="file" accept="image/*" name="file" (click)="setEditImg()" (change)="showPreviewImage($event)"/>
         </div>
     </div>
     <div class="mb-3">
@@ -44,7 +44,7 @@
 
 
 <div class="col-7 p-2 ms-4 recommendations" *ngIf="recommendationsArray">
-  <div *ngFor="let recommendation of recommendationsArray" class="recommendation">
+  <div *ngFor="let recommendation of recommendationsArray" class="recommendation mb-3">
     <app-recommendation-card [recommendation]="recommendation" (onEditClick)="editRecommendation($event)" (onDeleteClick)="deleteRecommendation($event)">
     </app-recommendation-card>
     </div>

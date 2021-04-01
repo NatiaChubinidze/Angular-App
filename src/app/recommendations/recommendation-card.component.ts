@@ -9,8 +9,10 @@ import { IRecommendation } from '../data/recommendations.interface';
 })
 export class RecommendationCardComponent implements OnInit {
   @Input() recommendation: IRecommendation;
+
   @Output() onEditClick = new EventEmitter();
   @Output() onDeleteClick = new EventEmitter();
+
 
   constructor() {}
 
@@ -22,4 +24,6 @@ export class RecommendationCardComponent implements OnInit {
   onDeleteIconClick(){
     this.onDeleteClick.emit(this.recommendation);
   }
+
+ 
 }

@@ -24,14 +24,18 @@ export class MenuComponent implements OnInit {
           firebase
             .auth()
             .currentUser.getIdToken(true)
-            .then((token) => localStorage.setItem(TOKEN_KEY, token))
-            .catch(()=>{});
+            .then((token) => {
+              localStorage.setItem(TOKEN_KEY, token);
+              this._loginService.setTokenValidTime();
+            })
+            .catch(() => {});
+        } else {
+          this._loginService.signOut();
+          this._router.navigate(['/login']);
         }
-        this._loginService.signOut();
         if (TOKEN_EXP_KEY) {
           localStorage.removeItem(TOKEN_EXP_KEY);
         }
-        this._router.navigate(['/login']);
       }
     }, EXP_TIME);
   }
