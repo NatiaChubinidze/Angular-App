@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RecommendationsComponent } from './recommendations.component';
 import { RouterModule } from '@angular/router';
 import { RecommendationCardComponent } from './recommendation-card.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
@@ -18,6 +18,7 @@ import {firebaseConfig} from 'src/firebaseConfig';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
