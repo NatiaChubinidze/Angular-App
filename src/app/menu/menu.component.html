@@ -3,22 +3,28 @@
     <div class="collapse navbar-collapse flex-end" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item me-4">
-          <a class="nav-link" [routerLink]="['/home']">Home</a>
+          <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active">Home</a>
         </li>
-        <li class="nav-item me-4">
-          <a class="nav-link" [routerLink]="['/articles', 'en']">Articles</a>
+        <li *ngIf="(_loginService.currentUser$ | async)?.uid" class="nav-item me-4">
+          <a class="nav-link" [routerLink]="['/articles', 'en']" routerLinkActive="active">Articles</a>
         </li>
-        <li class="nav-item me-4">
-          <a class="nav-link" [routerLink]="['/members']">Members</a>
+        <li *ngIf="(_loginService.currentUser$ | async)?.uid" class="nav-item me-4" >
+          <a class="nav-link" [routerLink]="['/members']" routerLinkActive="active">Members</a>
         </li>
-        <li class="nav-item me-4">
-          <a class="nav-link" [routerLink]="['/profile']">Profile</a>
+        <li class="nav-item me-4" *ngIf="(_loginService.currentUser$ | async)?.uid">
+          <a class="nav-link" [routerLink]="['/profile']" routerLinkActive="active">Profile</a>
         </li>
-        <li class="nav-item me-4">
-          <a class="nav-link" [routerLink]="['/recommendations']">Recommendations</a>
+        <li class="nav-item me-4" *ngIf="!(_loginService.currentUser$ | async)?.uid">
+          <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active">Sign In</a>
+        </li>
+        <li class="nav-item me-4" *ngIf="!(_loginService.currentUser$ | async)?.uid">
+          <a class="nav-link" [routerLink]="['/register']" routerLinkActive="active">Sign Up</a>
+        </li>
+        <li class="nav-item me-4" *ngIf="(_loginService.currentUser$ | async)?.uid">
+          <a class="nav-link" [routerLink]="['/recommendations']" routerLinkActive="active">Recommendations</a>
         </li>
       </ul>
-      <button type="button" class="btn btn-secondary" (click)="onSignOut()">Sign Out</button>
+      <button *ngIf="(_loginService.currentUser$ | async)?.uid" type="button" class="btn btn-secondary" (click)="onSignOut()">Sign Out</button>
     </div>
   </div>
 </nav>

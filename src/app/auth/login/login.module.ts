@@ -1,14 +1,19 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule} from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { LoginComponent } from './login.component';
 import { RouterModule } from '@angular/router';
 import {AngularFireAuthModule } from '@angular/fire/auth';
 import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+import { RegisterComponent } from '../register/register.component';
+import { LoginComponent } from './login.component';
+
+
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     CommonModule,
@@ -20,6 +25,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
       {
       path:'login',
       component:LoginComponent
+    },
+    {
+      path:'register',
+      component:RegisterComponent
     }
     ])
   ]

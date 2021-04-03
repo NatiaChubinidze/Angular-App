@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { IProfile } from '../data/profile.interface';
 import { FireBaseService } from './profile.service';
 

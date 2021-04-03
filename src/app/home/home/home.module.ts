@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+
+
 import { UsersComponent } from 'src/app/users/users.component';
-import { capitalize } from 'src/app/pipes/pipes';
 import { PostsComponent } from 'src/app/posts/posts.component';
-import { LoginGuardGuard } from 'src/app/login-guard.guard';
-
-
+import { LoginGuardGuard } from 'src/app/auth/login-guard.guard';
+import { capitalize } from 'src/app/pipes/pipes';
 
 
 @NgModule({
@@ -28,7 +28,7 @@ import { LoginGuardGuard } from 'src/app/login-guard.guard';
       {
         path:'home',
         component:UsersComponent,
-        
+        canActivate:[LoginGuardGuard]
       },
       {
         path: '',

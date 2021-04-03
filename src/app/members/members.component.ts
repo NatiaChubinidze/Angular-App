@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
 import { IMember, IMemberInfo } from '../data/member.interface';
 import { MembersService } from './members.service';
 

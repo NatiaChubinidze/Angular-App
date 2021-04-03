@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+
 import { map } from 'rxjs/operators';
-import { IRecommendation } from '../data/recommendations.interface';
+
+import { IRecommendation } from '../../data/recommendations.interface';
 
 @Injectable({
   providedIn: 'root',
