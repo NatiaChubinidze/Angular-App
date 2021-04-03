@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-
 import { AngularFireStorage } from '@angular/fire/storage';
-import { IRecommendation } from '../data/recommendations.interface';
+
 import { finalize } from 'rxjs/operators';
+
+import { IRecommendation } from '../../data/recommendations.interface';
 import { FireBaseRecommendationService } from './recommendations.service';
+
 
 @Component({
   selector: 'app-recommendations',
@@ -70,7 +72,7 @@ export class RecommendationsComponent implements OnInit {
       console.log("edit mode files exist")
       this.editImage();
       this.editMode = false;
-      event.target.querySelector("input").files[0].value=null;
+      
     } else {
       console.log("save image. files exist")
       this.saveImage();

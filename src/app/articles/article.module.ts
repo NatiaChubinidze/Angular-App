@@ -2,13 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { ArticlesComponent } from './articles.component';
 import { CardComponent } from './card/card.component';
 import { ArticleSeeMoreComponent } from './article-see-more/article-see-more.component';
-import { LoginGuardGuard } from '../login-guard.guard';
+import { LoginGuardGuard } from '../auth/login-guard.guard';
 import {ArticleResolverService} from './article-resolver.service'
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
 import { ArticleHeaderInterceptorService } from './add-header.interceptor.service';
 import { HttpCacheInterceptorService } from '../core/http-cache.interceptor';
 

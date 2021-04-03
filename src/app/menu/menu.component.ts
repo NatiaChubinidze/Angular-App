@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../login/login.service';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
+
+import { LoginService } from '../auth/login/login.service';
 import { EXP_TIME, TOKEN_EXP_KEY, TOKEN_KEY } from '../data/constants';
 
 @Component({
@@ -12,40 +13,40 @@ import { EXP_TIME, TOKEN_EXP_KEY, TOKEN_KEY } from '../data/constants';
 })
 export class MenuComponent implements OnInit {
   constructor(
-    private _loginService: LoginService,
+    public _loginService: LoginService,
     private _router: Router,
-    public auth: AngularFireAuth
+    private auth: AngularFireAuth
   ) {}
 
   ngOnInit(): void {
-    setInterval(() => {
-      if (!this._loginService.tokenIsValid()) {
-        if (this._loginService.googleAuth) {
-          firebase
-            .auth()
-            .currentUser.getIdToken(true)
-            .then((token) => {
-              localStorage.setItem(TOKEN_KEY, token);
-              this._loginService.setTokenValidTime();
-            })
-            .catch(() => {});
-        } else {
-          this._loginService.signOut();
-          this._router.navigate(['/login']);
+    if (localStorage.getItem(TOKEN_KEY)) {
+      setInterval(() => {
+        if (!this._loginService.tokenIsValid()) {
+          if (this._loginService.googleAuth && this._loginService.userIsActive()) {
+            
+            firebase
+              .auth()
+              .currentUser.getIdToken(true)
+              .then((token) => {
+                localStorage.setItem(TOKEN_KEY, token);
+                this._loginService.setTokenValidTime();
+              })
+              .catch(() => {});
+          } else {
+            this._loginService.signOut();
+            this._router.navigate(['/login']);
+          }
+          if (TOKEN_EXP_KEY) {
+            localStorage.removeItem(TOKEN_EXP_KEY);
+          }
         }
-        if (TOKEN_EXP_KEY) {
-          localStorage.removeItem(TOKEN_EXP_KEY);
-        }
-      }
-    }, EXP_TIME);
+      }, EXP_TIME);
+    }
   }
 
   onSignOut() {
-    if (this._loginService.googleAuth) {
-      this.auth.signOut();
-      this._loginService.googleAuth = false;
-    }
+    console.log("sign out");
+    console.log(this.auth.signOut());
     this._loginService.signOut();
-    this._router.navigate(['/login']);
   }
 }

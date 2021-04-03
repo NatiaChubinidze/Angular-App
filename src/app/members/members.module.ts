@@ -1,15 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { NgxPaginationModule } from 'ngx-pagination';
 
-import { MemberResolverService } from './member-resolver.service';
 import { MembersComponent } from './members.component';
-import { HttpCacheInterceptorService } from '../core/http-cache.interceptor';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PaginationComponent } from './pagination/pagination.component';
-import { LoginGuardGuard } from '../login-guard.guard';
+
+import { HttpCacheInterceptorService } from '../core/http-cache.interceptor';
+import { MemberResolverService } from './member-resolver.service';
+
+import { LoginGuardGuard } from '../auth/login-guard.guard';
+
 
 @NgModule({
   declarations: [MembersComponent, PaginationComponent],
