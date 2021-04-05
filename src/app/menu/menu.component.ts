@@ -4,7 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
 
 import { LoginService } from '../auth/login/login.service';
-import { EXP_TIME, TOKEN_EXP_KEY, TOKEN_KEY } from '../data/constants';
+import { EXP_TIME, TOKEN_EXP_KEY, TOKEN_KEY } from '../shared/data/constants';
 
 @Component({
   selector: 'app-menu',

@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 
 import { IArticle } from '../articles/article-interfaces';
-import { IForm } from '../data/filter-form.interface';
+import { IForm } from '../shared/data/filter-form.interface';
 
 @Injectable({
   providedIn: 'root',

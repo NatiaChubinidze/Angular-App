@@ -1,70 +1,94 @@
 /*author:starttemplate*/
 /*reference site : starttemplate.com*/
 body {
-    background-image: url("https://c0.wallpaperflare.com/preview/71/610/431/advice-article-background-beverage.jpg");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-  
-    -webkit-font-smoothing: antialiased;
-    font: normal 14px Roboto, arial, sans-serif;
-    font-family: "Dancing Script", cursive !important;
-  }
-  
-  .container {
-    padding: 110px;
-    height: 100vh;
-  }
-  ::placeholder {
-    /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #ffffff !important;
-    opacity: 1; /* Firefox */
-    font-size: 18px !important;
-  }
-  .form-login {
-    background-color: rgba(0, 0, 0, 0.55);
-    padding-top: 10px;
-    padding-bottom: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    border-radius: 15px;
-    border-color: #d2d2d2;
-    border-width: 5px;
-    color: white;
-    box-shadow: 0 1px 0 #cfcfcf;
-  }
-  .form-control {
-    background: transparent !important;
-    color: white !important;
-    font-size: 18px !important;
-  }
-  h1 {
-    color: white !important;
-  }
-  h4 {
-    border: 0 solid #fff;
-    border-bottom-width: 1px;
-    padding-bottom: 10px;
-    text-align: center;
-  }
-  
-  .form-control {
-    border-radius: 10px;
-  }
-  .text-white {
-    color: rgb(90, 86, 86) !important;
-  }
-  .wrapper {
-    text-align: center;
-  }
-  .footer p {
-    font-size: 18px;
-  }
-  
-  .row {
-    justify-content: flex-end;
-  }
-  
-  a:hover{
-    cursor:pointer;
-  }
+  background-image: url("https://c0.wallpaperflare.com/preview/71/610/431/advice-article-background-beverage.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  -webkit-font-smoothing: antialiased;
+  font: normal 14px Roboto, arial, sans-serif;
+  font-family: "Dancing Script", cursive !important;
+}
+
+.container {
+  padding: 0px 110px;
+  height: 100vh;
+}
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #ffffff !important;
+  opacity: 1; /* Firefox */
+  font-size: 18px !important;
+}
+.form-login {
+  background-color: rgba(0, 0, 0, 0.55);
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 15px;
+  border-color: #d2d2d2;
+  border-width: 5px;
+  color: white;
+  box-shadow: 0 1px 0 #cfcfcf;
+}
+.form-control {
+  background: transparent !important;
+  color: white !important;
+  font-size: 18px !important;
+}
+h1 {
+  color: white !important;
+}
+h4 {
+  border: 0 solid #fff;
+  border-bottom-width: 1px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.form-control {
+  border-radius: 10px;
+}
+.text-white {
+  color: rgb(90, 86, 86) !important;
+}
+.wrapper {
+  text-align: center;
+}
+.footer p {
+  font-size: 18px;
+}
+
+.row {
+  justify-content: flex-end;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+.required {
+  color: rgb(255, 61, 61);
+  float: right;
+}
+
+.group-btn {
+  width: auto;
+}
+
+.loginBtn {
+  width: 100px;
+}
+.patternText {
+  height: 50px;
+}
+
+.errorText {
+  min-height: 100px;
+}
+
+.emailRegInfo{
+  min-height:20px;
+}

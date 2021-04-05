@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { IMember } from '../data/member.interface';
+import { IMember } from '../shared/data/member.interface';
 
 @Injectable({
   providedIn: 'root',

@@ -14,57 +14,72 @@
     <title>Sign In</title>
   </head>
   <body>
-    <!-- <div class="col-5 mx-auto">
-      <ngx-auth-firebaseui></ngx-auth-firebaseui>
-      <ngx-auth-firebaseui-login></ngx-auth-firebaseui-login>
-      <ngx-auth-firebaseui-register></ngx-auth-firebaseui-register>
-    </div> -->
-    <!-- Page Content -->
     <div class="container">
       <div class="row">
         <div class="col-md-offset-5 col-md-4 text-center">
+          <div class="mt-3 errorText">
+            <div
+              class="alert alert-danger"
+              *ngIf="_getUserService.errorMessage"
+            >
+              <p class="m-0">{{ _getUserService.errorMessage }}</p>
+            </div>
+          </div>
           <h1 class="text-white">Please, Sign in</h1>
+
           <div class="form-login">
             <h4>Secure Login</h4>
 
-            <input
-              type="text"
-              id="email"
-              name="email"
-              class="form-control input-sm chat-input"
-              placeholder="username"
-              value="eve.holt@reqres.in"
-              [(ngModel)]="userInfo.email"
-            />
+            <form [formGroup]="authForm" (ngSubmit)="logInWithEmail()">
+              <div class="emailRegInfo">
+              <em class="required" *ngIf="emailIsInvalid()"
+                >Required Pattern: Must contain @ and a dot</em
+              >
+              </div>
+              <input
+                type="text"
+                id="email"
+                name="email"
+                class="form-control input-sm chat-input"
+                placeholder="username"
+                formControlName="email"
+                [ngClass]="{ 'is-invalid': emailIsInvalid() }"
+                autocomplete="off"
+              />
+              <div class="patternText">
+                <em class="required" *ngIf="passwordIsInvalid()"
+                  >Required Pattern: min(6), max(20) characters, 1 lowercase, 1
+                  uppercase, 1 special character, 1 number
+                </em>
+              </div>
+              <input
+                type="text"
+                id="password"
+                name="password"
+                class="form-control input-sm chat-input"
+                placeholder="password"
+                formControlName="password"
+                [ngClass]="{ 'is-invalid': passwordIsInvalid() }"
+                autocomplete="off"
+              />
 
-            <input
-              type="text"
-              id="password"
-              name="password"
-              class="form-control input-sm chat-input"
-              placeholder="password"
-              value="cityslicka"
-              [(ngModel)]="userInfo.password"
-            />
-
-            <div class="wrapper">
-              <span class="group-btn">
-                <button
-                  class="btn btn-danger btn-md mt-3 me-3"
-                  (click)="logInWithEmail()"
+              <div class="wrapper">
+                <div
+                  class="col-5 mx-auto"
+                  (mouseenter)="buttonHover = true"
+                  (mouseleave)="buttonHover = false"
                 >
-                  login <i class="fa fa-sign-in"></i>
-                </button>
-                <button
-                  class="btn btn-danger btn-md mt-3"
-                  [routerLink]="['/register']"
-                >
-                  Register <i class="fa fa-sign-in"></i>
-                </button>
-              </span>
-            </div>
+                  <button
+                    class="btn btn-danger btn-md mt-3 me-3 loginBtn"
+                    [disabled]="authForm.invalid"
+                  >
+                    login <i class="fa fa-sign-in"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
             <p class="mt-3">
-              or sign in with <a (click)="googleLogin()"><b>Google</b></a> OR 
+              or sign in with <a (click)="googleLogin()"><b>Google</b></a> OR
               <a (click)="githubSignin()"><b>GitHub</b></a>
             </p>
           </div>

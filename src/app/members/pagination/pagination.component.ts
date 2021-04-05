@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { IMemberInfo } from '../../data/member.interface';
+import { IMemberInfo } from '../../shared/data/member.interface';
 
 @Component({
   selector: 'app-pagination',

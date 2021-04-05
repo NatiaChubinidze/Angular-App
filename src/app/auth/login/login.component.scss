@@ -12,7 +12,7 @@ body {
 }
 
 .container {
-  padding: 110px;
+  padding: 0px 110px;
   height: 100vh;
 }
 ::placeholder {
@@ -65,6 +65,29 @@ h4 {
   justify-content: flex-end;
 }
 
-a:hover{
-  cursor:pointer;
+a:hover {
+  cursor: pointer;
+}
+
+.required {
+  color: rgb(255, 61, 61);
+  float: right;
+}
+
+.group-btn {
+  width: auto;
+}
+
+.loginBtn {
+  width: 100px;
+}
+.patternText {
+  height: 50px;
+}
+
+.errorText {
+  min-height: 100px;
+}
+.emailRegInfo{
+  min-height:20px;
 }
