@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { UsersComponent } from 'src/app/users/users.component';
 import { PostsComponent } from 'src/app/posts/posts.component';
 import { LoginGuardGuard } from 'src/app/auth/login-guard.guard';
-import { capitalize } from 'src/app/pipes/pipes';
+import { capitalize } from 'src/app/shared/pipes/pipes';
 
 
 @NgModule({

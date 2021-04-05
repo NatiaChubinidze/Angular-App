@@ -3,7 +3,7 @@ import { ActivatedRoute,Router } from '@angular/router';
 
 import { ArticlesService } from './articles.service';
 import { IArticle, ILanguage } from './article-interfaces';
-import { IForm } from '../data/filter-form.interface';
+import { IForm } from '../shared/data/filter-form.interface';
 
 @Component({
   selector: 'app-articles',

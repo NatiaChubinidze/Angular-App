@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
-import { IRecommendation } from '../../data/recommendations.interface';
+import { IRecommendation } from '../../shared/data/recommendations.interface';
 
 @Component({
   selector: 'app-recommendation-card',

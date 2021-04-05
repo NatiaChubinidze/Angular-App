@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import {Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import firebase from 'firebase/app';
 
-import { TOKEN_KEY, TOKEN_EXP_KEY, TOKEN_TTL } from '../../data/constants';
-import { IUserInfo } from 'src/app/data/user-info.interface';
-
+import {
+  TOKEN_KEY,
+  TOKEN_EXP_KEY,
+  TOKEN_TTL,
+} from '../../shared/data/constants';
+import { IUserInfo } from 'src/app/shared/data/user-info.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -17,8 +20,9 @@ export class LoginService {
 
   githubAuth: boolean;
   googleAuth: boolean;
+  errorMessage: string;
   constructor(private _router: Router, private auth: AngularFireAuth) {
-    this.currentUser$=this.auth.authState;
+    this.currentUser$ = this.auth.authState;
   }
 
   setTokenValidTime(): void {
@@ -44,13 +48,13 @@ export class LoginService {
   }
 
   signOut(): void {
-    console.log("auth sign out firebase")
+    console.log('auth sign out firebase');
     this.auth.signOut();
-    if(localStorage.getItem(TOKEN_KEY)){
-    localStorage.removeItem(TOKEN_KEY);
+    if (localStorage.getItem(TOKEN_KEY)) {
+      localStorage.removeItem(TOKEN_KEY);
     }
-    if(localStorage.getItem(TOKEN_EXP_KEY)){
-    localStorage.removeItem(TOKEN_EXP_KEY);
+    if (localStorage.getItem(TOKEN_EXP_KEY)) {
+      localStorage.removeItem(TOKEN_EXP_KEY);
     }
     this._router.navigate(['/login']);
   }
@@ -62,6 +66,7 @@ export class LoginService {
   }
 
   signInGithub() {
+    this.errorMessage = null;
     this.githubAuth = true;
     this.auth
       .signInWithPopup(new firebase.auth.GithubAuthProvider())
@@ -69,10 +74,14 @@ export class LoginService {
         if (data.credential.accessToken) {
           this._router.navigate(['/home']);
         }
+      })
+      .catch((error) => {
+        this.errorMessage = error.message;
       });
   }
 
   signInGoogle() {
+    this.errorMessage = null;
     this.googleAuth = true;
     this.auth
       .signInWithPopup(new firebase.auth.GoogleAuthProvider())
@@ -80,10 +89,14 @@ export class LoginService {
         if (data.credential.accessToken) {
           this._router.navigate(['/home']);
         }
+      })
+      .catch((error) => {
+        this.errorMessage = error.message;
       });
   }
 
   signInEmail(data: IUserInfo) {
+    this.errorMessage = null;
     this.auth
       .signInWithEmailAndPassword(data.email, data.password)
       .then((userInfo) => {
@@ -93,10 +106,14 @@ export class LoginService {
           this.setTokenValidTime();
           this._router.navigate(['/home']);
         }
+      })
+      .catch((error) => {
+        this.errorMessage = error.message;
       });
   }
 
   register(userInfo) {
+    this.errorMessage = null;
     this.auth
       .createUserWithEmailAndPassword(userInfo.email, userInfo.password)
       .then((data) => {
@@ -106,17 +123,22 @@ export class LoginService {
           this.setTokenValidTime();
           this._router.navigate(['/home']);
         }
+      })
+      .catch((error) => {
+        this.errorMessage = error.message;
       });
   }
 
-  userIsActive(){
-    return this.currentUser$.pipe(map((userInfo:any)=>{
-      if(userInfo && userInfo.uid){
-        return true;
-      } else {
-        this._router.navigate(['/login']);
-        return false;
-      }
-    }))
+  userIsActive() {
+    return this.currentUser$.pipe(
+      map((userInfo: any) => {
+        if (userInfo && userInfo.uid) {
+          return true;
+        } else {
+          this._router.navigate(['/login']);
+          return false;
+        }
+      })
+    );
   }
 }

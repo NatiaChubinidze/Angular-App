@@ -10,7 +10,7 @@ import {
 
 import { IArticle } from './article-interfaces';
 import { ArticlesService } from './articles.service';
-import { IForm } from '../data/filter-form.interface';
+import { IForm } from '../shared/data/filter-form.interface';
 
 @Injectable({
   providedIn: 'root',

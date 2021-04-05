@@ -6,63 +6,95 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <meta
-      name="keywords"
-      content="unique login form,leamug login form,boostrap login form,responsive login form,free css html login form,download login form"
-    />
+   
     <meta name="author" content="leamug" />
-    <title>Registration</title>
+    <title>Sign Up</title>
   </head>
   <body>
-    <!-- <div class="col-5 mx-auto">
-      <ngx-auth-firebaseui></ngx-auth-firebaseui>
-      <ngx-auth-firebaseui-login></ngx-auth-firebaseui-login>
-      <ngx-auth-firebaseui-register></ngx-auth-firebaseui-register>
-    </div> -->
-    <!-- Page Content -->
     <div class="container">
       <div class="row">
         <div class="col-md-offset-5 col-md-4 text-center">
-          <h1 class="text-white">Register</h1>
-          <div class="form-login">
-            <h4>Your Credentials</h4>
-
-            <input
-              type="text"
-              id="email"
-              name="email"
-              class="form-control input-sm chat-input"
-              placeholder="username"
-              value="eve.holt@reqres.in"
-              [(ngModel)]="userInfo.email"
-            />
-
-            <input
-              type="text"
-              id="password"
-              name="password"
-              class="form-control input-sm chat-input"
-              placeholder="password"
-              value="cityslicka"
-              [(ngModel)]="userInfo.password"
-            />
-
-            <div class="wrapper">
-              <span class="group-btn">
-                <button
-                  class="btn btn-danger btn-md mt-3 me-3"
-                  (click)="register()"
-                >
-                  Register <i class="fa fa-sign-in"></i>
-                </button>
-                <button
-                  class="btn btn-danger btn-md mt-3"
-                  [routerLink]="['/login']"
-                >
-                  Login <i class="fa fa-sign-in"></i>
-                </button>
-              </span>
+          <div class="mt-3 errorText">
+            <div
+              class="alert alert-danger"
+              *ngIf="_getUserService.errorMessage"
+            >
+              <p class="m-0">{{ _getUserService.errorMessage }}</p>
             </div>
+          </div>
+          <h1 class="text-white">Credentials</h1>
+
+          <div class="form-login">
+            <h4>Secure sign up</h4>
+
+            <form [formGroup]="authForm" (ngSubmit)="register()">
+              <div class="emailRegInfo">
+              <em class="required" *ngIf="emailIsInvalid()"
+                >Required Pattern: Must contain @ and a dot. Forbidden Username - test@test.com</em
+              >
+              </div>
+              <input
+                type="text"
+                id="email"
+                name="email"
+                class="form-control input-sm chat-input"
+                placeholder="username"
+                formControlName="email"
+                [ngClass]="{ 'is-invalid': emailIsInvalid() }"
+                autocomplete="off"
+              />
+
+
+
+              <div class="patternText">
+                <em class="required" *ngIf="passwordIsInvalid()"
+                  >Required Pattern: min(6), max(20) characters, 1 lowercase, 1
+                  uppercase, 1 special character, 1 number
+                </em>
+              </div>
+              <input
+                type="text"
+                id="password"
+                name="password"
+                class="form-control input-sm chat-input"
+                placeholder="password"
+                formControlName="password"
+                [ngClass]="{ 'is-invalid': passwordIsInvalid() }"
+                autocomplete="off"
+              />
+
+
+              <div class="emailRegInfo">
+                <em class="required" *ngIf="confirmPasswordIsInvalid()"
+                  >Required. Passwords must match!</em
+                >
+                </div>
+              <input
+              type="text"
+              id="reEnterPassword"
+              name="reEnterPassword"
+              class="form-control input-sm chat-input"
+              placeholder="Re-enter password"
+              formControlName="reEnterPassword"
+              [ngClass]="{ 'is-invalid': confirmPasswordIsInvalid() }"
+              autocomplete="off"
+            />
+
+              <div class="wrapper">
+                <div
+                  class="col-5 mx-auto"
+                  (mouseenter)="buttonHover = true"
+                  (mouseleave)="buttonHover = false"
+                >
+                  <button
+                    class="btn btn-danger btn-md mt-3 me-3 loginBtn"
+                    [disabled]="authForm.invalid"
+                  >
+                    Register <i class="fa fa-sign-in"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
             
           </div>
         </div>
@@ -70,4 +102,3 @@
     </div>
   </body>
 </html>
-

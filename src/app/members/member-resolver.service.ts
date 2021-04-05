@@ -10,7 +10,7 @@ import {
 
 
 import { MembersService } from './members.service';
-import { IMember } from '../data/member.interface';
+import { IMember } from '../shared/data/member.interface';
 
 
 @Injectable({
