@@ -17,7 +17,7 @@ import { IUserInfo } from 'src/app/shared/data/user-info.interface';
 })
 export class LoginService {
   currentUser$ = new Observable<firebase.User | null>();
-
+ user:any;
   githubAuth: boolean;
   googleAuth: boolean;
   errorMessage: string;
@@ -57,6 +57,7 @@ export class LoginService {
       localStorage.removeItem(TOKEN_EXP_KEY);
     }
     this._router.navigate(['/login']);
+    this.auth.user.subscribe(data=>{this.user=data});
   }
 
   isSignedIn(): boolean {
@@ -93,6 +94,7 @@ export class LoginService {
       .catch((error) => {
         this.errorMessage = error.message;
       });
+      this.auth.user.subscribe(data=>{this.user=data});
   }
 
   signInEmail(data: IUserInfo) {
@@ -100,7 +102,6 @@ export class LoginService {
     this.auth
       .signInWithEmailAndPassword(data.email, data.password)
       .then((userInfo) => {
-        console.log(userInfo);
         if (userInfo.user) {
           localStorage.setItem(TOKEN_KEY, userInfo.user.refreshToken);
           this.setTokenValidTime();
@@ -117,7 +118,6 @@ export class LoginService {
     this.auth
       .createUserWithEmailAndPassword(userInfo.email, userInfo.password)
       .then((data) => {
-        console.log(data);
         if (data.user) {
           localStorage.setItem(TOKEN_KEY, data.user.refreshToken);
           this.setTokenValidTime();

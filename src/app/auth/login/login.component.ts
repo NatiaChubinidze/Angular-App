@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { IUserInfo } from '../../shared/data/user-info.interface';
 import { LoginService } from './login.service';
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit {
   authForm: FormGroup;
   buttonHover: boolean = false;
 
-  constructor(public _getUserService: LoginService) {
+  constructor(public _getUserService: LoginService, private route:Router) {
     this.email = new FormControl(
       '',
       Validators.compose([
@@ -51,7 +52,11 @@ export class LoginComponent implements OnInit {
   passwordIsInvalid(): boolean {
     return this.password.invalid && (this.password.touched || this.buttonHover);
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if(this._getUserService.userIsActive()){
+      this.route.navigate(['/home']);
+    }
+  }
 
   googleLogin() {
     this._getUserService.signInGoogle();
