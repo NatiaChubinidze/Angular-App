@@ -1,30 +1,102 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <div class="collapse navbar-collapse flex-end" id="navbarNavDropdown">
-      <ul class="navbar-nav">
-        <li class="nav-item me-4">
-          <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active">Home</a>
+    <div
+      class="collapse navbar-collapse flex-end flex-wrap"
+      id="navbarNavDropdown"
+    >
+      <ul class="navbar-nav col-6 flex-end">
+        <li class="nav-item"
+        *ngIf="(_loginService.currentUser$ | async)?.uid && _loginService.user"
+        >
+          <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active"
+            >Home</a
+          >
         </li>
-        <li *ngIf="(_loginService.currentUser$ | async)?.uid" class="nav-item me-4">
-          <a class="nav-link" [routerLink]="['/articles', 'en']" routerLinkActive="active">Articles</a>
+        <li
+          *ngIf="(_loginService.currentUser$ | async)?.uid && _loginService.user"
+          class="nav-item me-4"
+        >
+          <a
+            class="nav-link"
+            [routerLink]="['/articles', 'en']"
+            routerLinkActive="active"
+            >Articles</a
+          >
         </li>
-        <li *ngIf="(_loginService.currentUser$ | async)?.uid" class="nav-item me-4" >
-          <a class="nav-link" [routerLink]="['/members']" routerLinkActive="active">Members</a>
+        <li
+        *ngIf="(_loginService.currentUser$ | async)?.uid && _loginService.user"
+          class="nav-item me-4"
+        >
+          <a
+            class="nav-link"
+            [routerLink]="['/members']"
+            routerLinkActive="active"
+            >Members</a
+          >
         </li>
-        <li class="nav-item me-4" *ngIf="(_loginService.currentUser$ | async)?.uid">
-          <a class="nav-link" [routerLink]="['/profile']" routerLinkActive="active">Profile</a>
+        <li
+          class="nav-item me-4"
+          *ngIf="(_loginService.currentUser$ | async)?.uid && _loginService.user"
+        >
+          <a
+            class="nav-link"
+            [routerLink]="['/profile']"
+            routerLinkActive="active"
+            >Profile</a
+          >
         </li>
-        <li class="nav-item me-4" *ngIf="!(_loginService.currentUser$ | async)?.uid">
-          <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active">Sign In</a>
+        <li
+          class="nav-item me-4"
+          *ngIf="!((_loginService.currentUser$ | async)?.uid && _loginService.user)"
+        >
+          <a
+            class="nav-link"
+            [routerLink]="['/login']"
+            routerLinkActive="active"
+            >Sign In</a
+          >
         </li>
-        <li class="nav-item me-4" *ngIf="!(_loginService.currentUser$ | async)?.uid">
-          <a class="nav-link" [routerLink]="['/register']" routerLinkActive="active">Sign Up</a>
+        <li
+          class="nav-item me-4"
+          *ngIf="!((_loginService.currentUser$ | async)?.uid && _loginService.user)"
+        >
+          <a
+            class="nav-link"
+            [routerLink]="['/register']"
+            routerLinkActive="active"
+            >Sign Up</a
+          >
         </li>
-        <li class="nav-item me-4" *ngIf="(_loginService.currentUser$ | async)?.uid">
-          <a class="nav-link" [routerLink]="['/recommendations']" routerLinkActive="active">Recommendations</a>
+        <li
+          class="nav-item me-4"
+          *ngIf="(_loginService.currentUser$ | async)?.uid && _loginService.user"
+        >
+          <a
+            class="nav-link"
+            [routerLink]="['/recommendations']"
+            routerLinkActive="active"
+            >Recommendations</a
+          >
         </li>
+        <button
+        *ngIf="(_loginService.currentUser$ | async)?.uid && _loginService.user"
+          type="button"
+          class="btn btn-secondary"
+          (click)="onSignOut()"
+        >
+          Sign Out
+        </button>
       </ul>
-      <button *ngIf="(_loginService.currentUser$ | async)?.uid" type="button" class="btn btn-secondary" (click)="onSignOut()">Sign Out</button>
+      <ul class="navbar-nav col-7 flex-end mt-3" *ngIf="(_loginService.currentUser$ | async)?.uid && _loginService.user">
+        <button
+          class="btn"
+          *ngFor="let language of langs"
+          [class.btn-outline-secondary]="language === (activeLang$ | async)?.activeLang"
+          (click)="onChangeLanguage(language)"
+        >
+          {{ language }}
+        </button>
+      </ul>
     </div>
   </div>
 </nav>

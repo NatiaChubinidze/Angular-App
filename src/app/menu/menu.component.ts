@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
+import {Store} from '@ngrx/store';
 
 import { LoginService } from '../auth/login/login.service';
 import { EXP_TIME, TOKEN_EXP_KEY, TOKEN_KEY } from '../shared/data/constants';
+import {Languages} from '../ngrx/state/language.interface';
+import {changeLanguage} from '../ngrx/state/language.actions';
+import { ILanguage } from '../articles/article-interfaces';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-menu',
@@ -12,11 +16,16 @@ import { EXP_TIME, TOKEN_EXP_KEY, TOKEN_KEY } from '../shared/data/constants';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
+  langs:Array<string>=[];
+  activeLang$: Observable<ILanguage>;
+  activeLang:string='EN';
   constructor(
     public _loginService: LoginService,
     private _router: Router,
-    private auth: AngularFireAuth
-  ) {}
+    private store: Store<any>
+  ) {
+    this.activeLang$ = this.store.select('app');
+  }
 
   ngOnInit(): void {
     if (localStorage.getItem(TOKEN_KEY)) {
@@ -42,11 +51,18 @@ export class MenuComponent implements OnInit {
         }
       }, EXP_TIME);
     }
+    
+    this.langs=Object.keys(Languages).filter((item)=>isNaN(Number(item)));
+
+  }
+
+  onChangeLanguage(newLang:string):void{
+    console.log(newLang);
+    this.store.dispatch(changeLanguage({newLang}))
   }
 
   onSignOut() {
-    console.log("sign out");
-    console.log(this.auth.signOut());
     this._loginService.signOut();
+    
   }
 }

@@ -5,6 +5,7 @@ import { HttpClientModule} from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
+import { StoreModule } from '@ngrx/store';
 
 import { ArticleModule } from './articles/article.module';
 import { LoginModule } from './auth/login/login.module';
@@ -17,6 +18,7 @@ import { AppComponent } from './app.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { MenuComponent } from './menu/menu.component';
 import { ProfileComponent } from './profile/profile.component';
+import { languageReducer } from './ngrx/state/language.reducer';
 
 
 @NgModule({
@@ -25,8 +27,6 @@ import { ProfileComponent } from './profile/profile.component';
     PagenotfoundComponent,
     MenuComponent,
     ProfileComponent,
-    
-    
   ],
   imports: [
     BrowserModule,
@@ -39,6 +39,9 @@ import { ProfileComponent } from './profile/profile.component';
     ProfileModule,
     RecommendationsModule,
     BrowserAnimationsModule,
+    StoreModule.forRoot({
+      app:languageReducer
+    }),
     NgxAuthFirebaseUIModule.forRoot({
                     apiKey: "AIzaSyD0a0aNycl38R5ZqYtn74ZI23Nr29oUZV8",
                     authDomain: "angular-app-c3640.firebaseapp.com",
@@ -53,6 +56,7 @@ import { ProfileComponent } from './profile/profile.component';
         component: PagenotfoundComponent,
       },
     ]),
+   
     
     
   ],
